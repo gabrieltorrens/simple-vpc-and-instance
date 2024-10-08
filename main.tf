@@ -2,7 +2,7 @@
 provider "aws" {
   region = var.region
 }
-
+/*
 resource "aws_vpc" "my_vpc1" {
   cidr_block = "10.0.0.0/16"
   enable_dns_support = true
@@ -85,3 +85,4 @@ resource "aws_instance" "my_instance" {
               sudo systemctl enable httpd
               EOF
 }
+*/
