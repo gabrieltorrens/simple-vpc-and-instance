@@ -3,7 +3,7 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_vpc" "my_vpc" {
+resource "aws_vpc" "my_vpc1" {
   cidr_block = "10.0.0.0/16"
   enable_dns_support = true
   enable_dns_hostnames = true
@@ -15,7 +15,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_security_group" "my_sg" {
   name        = "${var.prefix}_sg"
   description = "Allow TLS inbound traffic"
-  vpc_id      = aws_vpc.my_vpc.id
+  vpc_id      = aws_vpc.my_vpc1.id
 
   ingress {
     from_port   = 80
@@ -33,7 +33,7 @@ resource "aws_security_group" "my_sg" {
 }
 
 resource "aws_subnet" "my_subnet_public" {
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = aws_vpc.my_vpc1.id
   cidr_block        = "10.0.1.0/24"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = true
@@ -45,7 +45,7 @@ resource "aws_subnet" "my_subnet_public" {
 
 
 resource "aws_internet_gateway" "my_igw" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = aws_vpc.my_vpc1.id
   tags = {
     Name = "${var.prefix}_igw"
   }
@@ -53,7 +53,7 @@ resource "aws_internet_gateway" "my_igw" {
 }
 
 resource "aws_route_table" "my_rt" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = aws_vpc.my_vpc1.id
 
   route {
     cidr_block = "0.0.0.0/0"
