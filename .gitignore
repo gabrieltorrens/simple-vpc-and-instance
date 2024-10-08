@@ -1,3 +1,8 @@
+atlantis.var
+*.zip
+ngrok
+atlantis*
+
 # Local .terraform directories
 **/.terraform/*
 
